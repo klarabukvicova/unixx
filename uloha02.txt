@@ -1,0 +1,16 @@
+1. Sfit nic nezahodil, protoze probehne uspesne pouye tehdy, kdyz zadane cislo
+n neni zaporne nebo v nasem pripade  neni vetsi nez pocet argumentu.
+2. 
+	$# pocet argumentu
+	${#promenna}	delka promenne
+	${!i}	vrati i-ty argument
+	${promenna:-vyraz} pokud 'promenna' neni nastavena nebo je
+	prazdna, vypise 'vyrazy	
+	${i:a}	vraci vsechny znaky promenne i od pozice a
+	${i:a:b} vraci b znaku z promenne i od pozice a
+	${promenna/vyraz/text}	v retezci 'promenna' najde podretezec 'vyraz' a nahradi jeho prvni vyskyt retezcem 'text'
+	${promenna//vyraz/text}	v retezci 'promenna' najde vsechny podretezce 'vyraz' a nahradi je retezcem 'text'
+Pozn. Pokud jsou promenna, vyraz a text promenne, tak bere jejich hodnotu, nikoli nazev.
+	@ znaci pole vstupnich argumentu a tak by mel byt jen v mistech, kde
+	se se vstupnimi argumenty pracuje. Tady zajistuje prepsani na B i ve
+	vsech ostatnich argumentech a ne jen v prvnim
