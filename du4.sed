@@ -5,15 +5,17 @@
 # f: sedovy skript je soubor
 
 #zistime, ci riadok obsahuje vyraz "A + B", skopirujeme si riadok do ulozneho priestoru
-/[0-9][0-9]* \+ [0-9][0-9]*/ {
+
+/[0-9][0-9]*( \+ |\+)[0-9][0-9]*/ {
 h
+
 
 #Upravime riadok, aby obsahoval iba "A B", tj. pouzijeme substitucny prikaz
 #    s vhodnym regularnym vyrazom, aby upravil riadok ktory moze byt v tvare
 #    "text text A + B text text C + D" na "A B"
 :cele
 {
-s/([0-9][0-9]*)( \+ )([0-9][0-9]*)/,\1 \3/
+s/([0-9][0-9]*)( \+ |\+)([0-9][0-9]*)/,\1 \3/
 s/(.*)(,)([0-9]+ [0-9]+)(.*)/\2\3/
 #na zaciatok som pridal ciarku)
 #    z oboch cisel vezmem posledne dve cifry a dam ich pred ciarku
@@ -129,12 +131,12 @@ s/(.*)(,)(0:$)/\1/
 s/(.*)/\1,/
 
 G
-s/([0-9][0-9]* \+ [0-9][0-9]*)/:\1/
-s/([0-9][0-9]*)(,)(.*)(:)([0-9][0-9]* \+ [0-9][0-9]*)/\3\1/
+s/([0-9][0-9]*( \+ |\+)[0-9][0-9]*)/:\1/
+s/([0-9][0-9]*)(,)(.*)(:)([0-9][0-9]*( \+ |\+)[0-9][0-9]*)/\3\1/
 h
 #mozna by tu melo bejt nejkay next, pokud procitam soubor
 }
-/[0-9][0-9]* \+ [0-9][0-9]*/ b cele
+/[0-9][0-9]*( \+ |\+)[0-9][0-9]*/ b cele
 s/\n//g
 }
 p
