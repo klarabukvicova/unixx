@@ -1,0 +1,31 @@
+$( touch /tmp/pomocna)
+$( touch /tmp/vstup)
+$( cat > /tmp/vstup)
+
+i=0
+pocetradku=$( cat /tmp/vstup | wc -l )
+MyTac(){
+while [ $i -lt $(( $pocetradku / $1 )) ]
+        do
+       		cat /tmp/vstup | tail -n $1
+		AktualniR=$((  $(cat /tmp/vstup | wc -l) - $1))
+		$( cat /tmp/vstup | head -n $AktualniR > /tmp/pomocna)
+		$( cat /tmp/pomocna > /tmp/vstup )
+		i=$(( $i + 1 ))
+	done
+}
+if [ -z "$1" ]; then
+	MyTac 1
+
+
+elif [ "$1" == "-n" ]; then
+	MyTac $2
+	if [ $(( $pocetradku % $2 )) != 0 ]; then
+		cat /tmp/vstup
+	fi
+fi
+
+rm /tmp/vstup
+rm /tmp/pomocna
+exit 0
+
