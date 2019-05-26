@@ -7,7 +7,8 @@ BEGIN {
 # nasledujuce prikazy sa vykonaju pre zaznamy, ktore matchuju dany regularny
 # vyraz (zacinaju na "A " alebo "a ")
 /^[Aa] / {
-	for (i = 2; i <= NF; ++i) {
+	FS="\""
+	for (i = 1; i <= NF; ++i) {
 	        #print i 	
 		if ($i ~ /[Hh][Rr][Ee][Ff]/) {
 			print $i
@@ -23,7 +24,7 @@ BEGIN {
 						print B[1]
 						next
 					}
-					l = $(i + 2)
+					l = $(i + 1)
 					gsub("&amp;", "&", 1)
 					gsub("&quot;", "\"", l)
 					gsub("&lt;", "<", l)
