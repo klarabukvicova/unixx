@@ -2,8 +2,8 @@ X="0"
 Pracuj() {
 	find $1 > pomocna
 	while read line; do
-		p=`echo $line | awk -F "\"/" '{ print $NF }'`
-	       	path=`echo $line | awk -F "\"/" 'BEGIN { OFS="/"} { $NF=""; print $0 }'`	
+		p=`echo $line | awk -F "\/" '{ print $NF }'`
+	       	path=`echo $line | awk -F "\/" 'BEGIN { OFS="/"} { $NF=""; print $0 }'`	
 		if ! [[ -d "$path"/"$p" ]]; then
 			if [[ "$X" == "-r" ]]; then
 				! [[ "$p" =~ [A-Z] ]] || continue
@@ -39,6 +39,7 @@ if [ -n "$1" ]; then
 
 else 
 	path=$(pwd)
+	#echo $path
 	Pracuj "$path"
 fi
 rm pomocna
