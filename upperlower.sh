@@ -23,6 +23,9 @@ Pracuj() {
 
 if [ -n "$1" ]; then 
 	X="$1"
+	if [ "$1" == "-r" ]; then
+		shift 1
+	fi
 	if [ -z "$1" ]; then
 		path=$(pwd)
 		Pracuj $path
@@ -33,9 +36,7 @@ if [ -n "$1" ]; then
 			Pracuj "$path"		
 		done
 	fi
-	if [ "$1" == "-r" ]; then
-		shift 1
-	fi
+
 else 
 	path=$(pwd)
 	Pracuj "$path"
