@@ -12,7 +12,7 @@ Pracuj() {
 				! [[ "$p" =~ [a-z] ]] || continue
 				new=`awk '{ print tolower($0); }' <<< "$p"`
 			fi			
-			if [ -e "$path"/"$nove" ]; then
+			if [ -e "$path"/"$new" ]; then
 				echo "Chyba: kolize na $new" >&2
 			else
 				mv "$path"/"$p" "$path"/"$new"
@@ -23,6 +23,9 @@ Pracuj() {
 
 if [ -n "$1" ]; then 
 	X="$1"
+	if [ "$1" == "-r" ]; then
+		shift 1
+	fi
 	if [ -z "$1" ]; then
 		path=$(pwd)
 		Pracuj $path
@@ -33,13 +36,10 @@ if [ -n "$1" ]; then
 			Pracuj "$path"		
 		done
 	fi
-	if [ "$1" == "-r" ]; then
-		shift 1
-	fi
+
 
 else 
 	path=$(pwd)
-	#echo $path
 	Pracuj "$path"
 fi
 rm pomocna
